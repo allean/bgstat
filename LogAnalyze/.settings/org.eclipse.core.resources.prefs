@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//config/config.properties=UTF-8
+encoding//webapp/pages/helloworld.ftl=UTF-8
+encoding//webapp/pages/stat.ftl=UTF-8
+encoding//webapp/pages/stat_product.ftl=UTF-8
+encoding//webapp/pages/stat_product_channel.ftl=UTF-8
+encoding//webapp/pages/stat_product_version.ftl=UTF-8
