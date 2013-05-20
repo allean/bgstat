@@ -32,7 +32,7 @@ public class StatProductChannelServlet extends HttpServlet {
 		
 		date = date == null?BgLogUtils.getToday() : date;
 		product_id = product_id == null? "banbao" : product_id;
-		product_platform = product_platform == null? "wp7" : product_platform;
+		product_platform = product_platform == null? "%" : product_platform;
 		
 		SqlSession session = DbHelper.getInstance().getSqlSession();
         LogDataDao logDataDao = session.getMapper(LogDataDao.class);

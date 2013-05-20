@@ -57,7 +57,7 @@
   	<th>${dailystat.day_after_new_user_lose_rate * 100}%</th>
   	<th>${dailystat.today_forward_count}</th>
   	<th>${dailystat.today_comment_count}</th>
-  	<th>${dailystat.today_active_user_read_rate}</th>
+  	<th><a href="/stat_product_channel?product_id=${product}&date=${dailystat.create_date}">${dailystat.today_active_user_read_rate}</a></th>
 
 <#if simple=="n">  	
   	<th>${dailystat.week_new_user_count}</th>
