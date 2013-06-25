@@ -19,14 +19,14 @@ public class Log {
 	String data_source = "s";
 	String device_oem = "";
 	String netword_brand = "";
-	String location = "";
+	String location = ""; //对非位置相关的log,此字段代表当前用户的位置（在哪儿点击的）。
 	
 	String operate = "";
 	String item_id = "";
 	String channel_id = "";
 	String app_id = "";
 	String sns_platform = "";
-	String opt_data = "";
+	String opt_data = ""; // 对有from_item_id的，此字段存from_item_id
 	
 	
 

@@ -223,9 +223,15 @@ public class LogParser {
 						String key = iterator.next();
 						if (line.indexOf(key) > 0) {
 							log.setOperate(operation.get(key));
+							if (line.indexOf("user_stat_event") > 0){
+								log.setData_source("c");
+							}
 							break;
 						}
 					}
+					
+					
+					
 
 					if ("".equals(log.getOperate())) {
 						// unkonw opt, just skip
@@ -501,6 +507,23 @@ public class LogParser {
 		if (channelId != null) {
 			log.setChannel_id(channelId);
 		}
+		
+		String location = getFromLocation(line);
+		if (location != null) {
+			log.setLocation(location);
+		}
+		
+		String fromItemId = getFromItemId(line);
+		if (fromItemId != null) {
+			log.setLocation(location);
+		}
+		
+		String timestamp = getTimestamp(line);
+		if (timestamp != null) {
+			long clientTime = Long.valueOf(timestamp);
+			log.setCreate_date(BgLogUtils.getDateFromStamp(clientTime));
+			log.setCreate_time(BgLogUtils.getTimeFromStamp(clientTime));
+		}
 
 	}
 
@@ -550,6 +573,13 @@ public class LogParser {
 		// operation.put("user logout", "logout"); //登出
 
 		// operation.put("user login", "home_site"); //收藏
+		
+		
+		operation.put("action: article", "article"); // 评论
+		operation.put("action: channel_open", "channel_open"); // 评论
+		operation.put("action: app_init", "app_init"); // 评论
+		operation.put("action: app_open", "app_open"); // 评论
+		operation.put("action: app_close", "app_close"); // 评论
 	}
 
 	static {
@@ -618,13 +648,31 @@ public class LogParser {
 		return ifMatch(USER_ID, line);
 	}
 
-	static Pattern ITEM_ID = Pattern.compile("item id: \\d+");
+	static Pattern ITEM_ID = Pattern.compile("item[\\s,_]id:\\s?\\d+");
 
 	private String getItemId(String line) {
 		return ifMatch(ITEM_ID, line);
 	}
+	
+	static Pattern FROM_LOCATION = Pattern.compile("from: \\w+");
 
-	static Pattern CHANNEL_ID = Pattern.compile("channel id: \\d+");
+	private String getFromLocation(String line) {
+		return ifMatch(FROM_LOCATION, line);
+	}
+	
+	static Pattern FROM_ITEM_ID = Pattern.compile("from_item_id: \\d+");
+
+	private String getFromItemId(String line) {
+		return ifMatch(FROM_ITEM_ID, line);
+	}
+
+	static Pattern TIMESTAMP = Pattern.compile("timestamp: \\d+");
+
+	private String getTimestamp(String line) {
+		return ifMatch(TIMESTAMP, line);
+	}	
+	
+	static Pattern CHANNEL_ID = Pattern.compile("channel[\\s,_]id: \\d+");
 
 	private String getChannelId(String line) {
 		return ifMatch(CHANNEL_ID, line);
@@ -635,7 +683,7 @@ public class LogParser {
 
 		while (matcher.find()) {
 			String id = matcher.group();
-			String[] s = id.split(": ");
+			String[] s = id.trim().split(":");
 			return s[1];
 		}
 		return null;

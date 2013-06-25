@@ -42,6 +42,16 @@ public class BgLogUtils {
 	}
 	
 	
+	public static String getDateFromStamp(long timestamp) {
+		DateTime dt = new DateTime(timestamp);
+		return dt.toString("yyyy-MM-dd");
+	}
+	
+	public static String getTimeFromStamp(long timestamp) {
+		DateTime dt = new DateTime(timestamp);
+		return dt.toString("HH:mm:ss");
+	}
+	
 	public static String getTodayTimeStr() {
 		SimpleDateFormat dateformat1 = new SimpleDateFormat(
 				"yyyy-MM-dd_HH-mm-ss");
@@ -262,7 +272,7 @@ public class BgLogUtils {
 	    
 	       
 //	            doUncompressFile("E:\\AUTORUN.INF.gz"); 
-	       
+	    	System.out.println(System.currentTimeMillis());
 
 	    } 
 }
