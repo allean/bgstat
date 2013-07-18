@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
 
 public interface LogDataDao {
 
@@ -309,6 +308,27 @@ public interface LogDataDao {
 	public int total_user_read_count(
 			@Param("product_id") String product_id,
 			@Param("product_platform") String product_platform);
+	
+	
+	
+	@Select(" SELECT count(1) AS num," +
+					" simple_device_oem as type from" +
+				 " (SELECT distinct(user_id), SPLIT_PART(device_oem, '_', 1) AS simple_device_oem" +
+				 	" FROM DATA " +
+				 	" WHERE device_oem IS NOT NULL " +
+				 		" and product_id=#{product_id}" +
+				 		product_platform +
+				 		create_date_range +
+				 		" )  as n_data" +
+				 	" GROUP BY simple_device_oem" +
+				 	" ORDER BY num DESC;"
+			)
+	public List<NumTypePair> device_oem_by_count(
+			@Param("product_id") String product_id,
+			@Param("product_platform") String product_platform,
+			@Param("start_date") String start_date,
+			@Param("to_date") String to_date);
+	
 	
 	
 	

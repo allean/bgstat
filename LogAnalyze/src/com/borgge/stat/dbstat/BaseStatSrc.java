@@ -200,11 +200,17 @@ public class BaseStatSrc {
 
 		
 		
-		BaseStatSrc src = new BaseStatSrc("dailynews", "%", "2013-05-12");
-		DailyStat ds = src.genDailyStat();
+//		BaseStatSrc src = new BaseStatSrc("dailynews", "%", "2013-05-12");
+//		DailyStat ds = src.genDailyStat();
 		
 		
-		List<ProductAndPlatform> l = BaseStatSrc.getAllProductAndVertion("2013-05-03");
+//		List<ProductAndPlatform> l = BaseStatSrc.getAllProductAndVertion("2013-05-03");
+//		System.out.println(l);
+		
+		SqlSession session = DbHelper.getInstance().getSqlSession();
+		LogDataDao logDataDao = session.getMapper(LogDataDao.class);
+		
+		List<NumTypePair> l = logDataDao.device_oem_by_count("banbao", "wp7", "2013-07-15", "2013-07-15");
 		System.out.println(l);
 		
 		

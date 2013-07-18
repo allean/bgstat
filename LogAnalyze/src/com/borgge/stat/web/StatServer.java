@@ -30,6 +30,7 @@ public class StatServer {
         context.addServlet(StatProductServlet.class, "/stat_product");
         context.addServlet(StatProductVertsionServlet.class, "/stat_product_version");
         context.addServlet(StatProductChannelServlet.class, "/stat_product_channel");
+        context.addServlet(StatProductDeviceOemServlet.class, "/stat_product_device_oem");
         context.addServlet(FreemarkerServlet.class, "*.ftl");
         
         server.addHandler(context);  

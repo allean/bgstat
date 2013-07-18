@@ -44,7 +44,7 @@
     <th>总转发数</th>
     <th>总转评论数</th>
 </#if>
-    
+    <th>详细</th>
     
   </tr>
   
@@ -79,7 +79,8 @@
   	<th>${dailystat.total_ip}</th>
   	<th>${dailystat.total_forward_count}</th>
   	<th>${dailystat.total_comment_count}</th>
- </#if> 	
+ </#if> 
+ 	<th><a href="/stat_product_device_oem?product_id=${product_id}&product_platform=${product_platform}&date=${dailystat.create_date}">品牌分布</a></th>	
   </tr>
   </#list>
   
